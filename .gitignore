@@ -58,8 +58,3 @@ Thumbs.db
 .pydevproject
 .pydev
 
-# Project settings
-src/main/resources/config.properties
-*.jks
-src/main/resources/publickey
-
