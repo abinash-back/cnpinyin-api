@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnRepository;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 
 @Service
@@ -27,4 +28,13 @@ public class VocabularyService {
 		return topicResources;
 	}
 
+	public List<LessonResource> getAllLesson() {
+		List<String> topics = cnpnRepository.findDistinctLesson();
+		List<LessonResource> lessonResources = new ArrayList<>();
+		for (String topic : topics) {
+			int size = cnpnRepository.countByLesson(topic);
+			lessonResources.add(new LessonResource(topic, size));
+		}
+		return lessonResources;
+	}
 }

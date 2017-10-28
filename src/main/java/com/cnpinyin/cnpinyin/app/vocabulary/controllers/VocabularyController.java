@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.services.VocabularyService;
 
@@ -24,5 +25,11 @@ public class VocabularyController {
 	public ResponseEntity<List<TopicResource> > getAllTopic() {
 		List<TopicResource> topicResources = vocabularyService.getAllTopic();
 	    return new ResponseEntity<List<TopicResource> >(topicResources, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "lesson", method = RequestMethod.GET)
+	public ResponseEntity<List<LessonResource> > getAllLesson() {
+		List<LessonResource> lessonResources = vocabularyService.getAllLesson();
+	    return new ResponseEntity<List<LessonResource> >(lessonResources, HttpStatus.OK);
 	}
 }

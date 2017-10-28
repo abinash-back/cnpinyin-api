@@ -13,4 +13,9 @@ public interface CnpnRepository extends JpaRepository<Cnpn, Integer> {
 	public List<String> findDistinctTopics();
 	
 	public int countByTopics(String topic);
+	
+	@Query("SELECT DISTINCT a.lesson FROM Cnpn a")
+	public List<String> findDistinctLesson();
+	
+	public int countByLesson(String lesson);
 }
