@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.services.VocabularyService;
 
@@ -31,5 +32,11 @@ public class VocabularyController {
 	public ResponseEntity<List<LessonResource> > getAllLesson() {
 		List<LessonResource> lessonResources = vocabularyService.getAllLesson();
 	    return new ResponseEntity<List<LessonResource> >(lessonResources, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "level", method = RequestMethod.GET)
+	public ResponseEntity<List<LevelResource> > getAllLevel() {
+		List<LevelResource> levelResources = vocabularyService.getAllLevel();
+	    return new ResponseEntity<List<LevelResource> >(levelResources, HttpStatus.OK);
 	}
 }

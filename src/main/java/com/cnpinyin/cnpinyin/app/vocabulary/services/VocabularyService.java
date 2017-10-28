@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnRepository;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 
 @Service
@@ -29,12 +30,23 @@ public class VocabularyService {
 	}
 
 	public List<LessonResource> getAllLesson() {
-		List<String> topics = cnpnRepository.findDistinctLesson();
+		List<String> lessons = cnpnRepository.findDistinctLesson();
 		List<LessonResource> lessonResources = new ArrayList<>();
-		for (String topic : topics) {
-			int size = cnpnRepository.countByLesson(topic);
-			lessonResources.add(new LessonResource(topic, size));
+		for (String lesson : lessons) {
+			int size = cnpnRepository.countByLesson(lesson);
+			lessonResources.add(new LessonResource(lesson, size));
 		}
 		return lessonResources;
+	}
+
+	public List<LevelResource> getAllLevel() {
+		List<Integer> levels = cnpnRepository.findDistinctLevel();
+		List<LevelResource> levelResources = new ArrayList<>();
+		for (Integer level : levels) {
+			int size = cnpnRepository.countByLevel(level);
+			String levelString = "Level "+level;
+			levelResources.add(new LevelResource(levelString, size));
+		}
+		return levelResources;
 	}
 }
