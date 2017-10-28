@@ -2,6 +2,8 @@ package com.cnpinyin.cnpinyin.app.cnpn.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,4 +25,10 @@ public interface CnpnRepository extends JpaRepository<Cnpn, Integer> {
 	public List<Integer> findDistinctLevel();
 	
 	public int countByLevel(Integer level);
+	
+	Page<Cnpn> findByTopics(String topic, Pageable pageable);
+	
+	Page<Cnpn> findByLesson(String lesson, Pageable pageable);
+	
+	Page<Cnpn> findByLevel(Integer level, Pageable pageable);
 }
