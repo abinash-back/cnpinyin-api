@@ -9,12 +9,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cnpinyin.cnpinyin.app.bctVoc.repositories.BctVocRepository;
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnRepository;
 import com.cnpinyin.cnpinyin.app.hskvoc.repositories.HskVocRepository;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
+import com.cnpinyin.cnpinyin.schemas.BctVoc;
 import com.cnpinyin.cnpinyin.schemas.Cnpn;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
 
@@ -27,6 +29,9 @@ public class VocabularyService {
 	
 	@Autowired
 	HskVocRepository hskVocRepository;
+	
+	@Autowired
+	BctVocRepository bctVocRepository;
 	
 	// CNPN
 	public List<TopicResource> getAllTopic(){
@@ -91,5 +96,10 @@ public class VocabularyService {
 	public Page<HskVoc> getByHskLevel(Integer level, Pageable pageable) {
 		Page<HskVoc> levels = hskVocRepository.findByLevel(level, pageable);
 		return levels;
+	}
+	
+	public Page<BctVoc> getAllBct(Pageable pageable) {
+		Page<BctVoc> bctAll = bctVocRepository.findAll(pageable);
+		return bctAll;
 	}
 }

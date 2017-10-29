@@ -18,6 +18,7 @@ import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.services.VocabularyService;
+import com.cnpinyin.cnpinyin.schemas.BctVoc;
 import com.cnpinyin.cnpinyin.schemas.Cnpn;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
 
@@ -85,5 +86,12 @@ public class VocabularyController {
 		Integer level = Integer.parseInt(levelName.substring(6));
 		Page<HskVoc> levelResources = vocabularyService.getByHskLevel(level,pageable);
 	    return new ResponseEntity<Page<HskVoc> >(levelResources, HttpStatus.OK);
+	}
+	
+	//By BCT
+	@RequestMapping(value = "bct", method = RequestMethod.GET)
+	public ResponseEntity<Page<BctVoc> > getAllBct(Pageable pageable) {
+		Page<BctVoc> bctAllResources = vocabularyService.getAllBct(pageable);
+	    return new ResponseEntity<Page<BctVoc> >(bctAllResources, HttpStatus.OK);
 	}
 }
