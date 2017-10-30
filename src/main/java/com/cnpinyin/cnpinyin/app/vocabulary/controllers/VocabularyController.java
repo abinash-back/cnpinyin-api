@@ -94,4 +94,6 @@ public class VocabularyController {
 		Page<BctVoc> bctAllResources = vocabularyService.getAllBct(pageable);
 	    return new ResponseEntity<Page<BctVoc> >(bctAllResources, HttpStatus.OK);
 	}
+	
+	
 }

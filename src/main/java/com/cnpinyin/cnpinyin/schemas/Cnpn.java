@@ -25,6 +25,7 @@ public class Cnpn {
 	String lesson;
 	String topics;
 	int level;
+	String cnchar;
 	String pytone_ws;
 	String pytone_n_ws;
 	String pytone_n;
