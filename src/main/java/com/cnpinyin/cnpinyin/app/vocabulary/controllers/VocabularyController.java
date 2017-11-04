@@ -20,6 +20,8 @@ import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.services.VocabularyService;
 import com.cnpinyin.cnpinyin.schemas.BctVoc;
 import com.cnpinyin.cnpinyin.schemas.Cnpn;
+import com.cnpinyin.cnpinyin.schemas.CnpnP2;
+import com.cnpinyin.cnpinyin.schemas.CnpnP3;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
 
 @RestController
@@ -95,5 +97,31 @@ public class VocabularyController {
 	    return new ResponseEntity<Page<BctVoc> >(bctAllResources, HttpStatus.OK);
 	}
 	
+	// By Topic Part 2
+	@RequestMapping(value = "topic2", method = RequestMethod.GET)
+	public ResponseEntity<List<TopicResource> > getAllTopicPart2() {
+		List<TopicResource> topicResources = vocabularyService.getAllTopicPart2();
+	    return new ResponseEntity<List<TopicResource> >(topicResources, HttpStatus.OK);
+	}
 	
+	@RequestMapping(value = "topic2/{topicName}", method = RequestMethod.GET)
+	public ResponseEntity<Page<CnpnP2> > getByTopicPart2(@PathVariable("topicName") final String topicName, 
+			Pageable pageable) {
+		Page<CnpnP2> topicResources = vocabularyService.getByTopicPart2(topicName,pageable);
+	    return new ResponseEntity<Page<CnpnP2> >(topicResources, HttpStatus.OK);
+	}
+	
+	// By Topic Part 2
+	@RequestMapping(value = "topic3", method = RequestMethod.GET)
+	public ResponseEntity<List<TopicResource>> getAllTopicPart3() {
+		List<TopicResource> topicResources = vocabularyService.getAllTopicPart3();
+		return new ResponseEntity<List<TopicResource>>(topicResources, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "topic3/{topicName}", method = RequestMethod.GET)
+	public ResponseEntity<Page<CnpnP3>> getByTopicPart3(@PathVariable("topicName") final String topicName,
+			Pageable pageable) {
+		Page<CnpnP3> topicResources = vocabularyService.getByTopicPart3(topicName, pageable);
+		return new ResponseEntity<Page<CnpnP3>>(topicResources, HttpStatus.OK);
+	}
 }
