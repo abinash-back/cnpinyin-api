@@ -23,6 +23,7 @@ import com.cnpinyin.cnpinyin.schemas.Cnpn;
 import com.cnpinyin.cnpinyin.schemas.CnpnP2;
 import com.cnpinyin.cnpinyin.schemas.CnpnP3;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
+import com.cnpinyin.cnpinyin.schemas.ScVoc;
 
 @RestController
 @RequestMapping(path = "voc", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -124,4 +125,14 @@ public class VocabularyController {
 		Page<CnpnP3> topicResources = vocabularyService.getByTopicPart3(topicName, pageable);
 		return new ResponseEntity<Page<CnpnP3>>(topicResources, HttpStatus.OK);
 	}
+	
+	// Single Character by range	
+	@RequestMapping(value = "sc", method = RequestMethod.GET)
+	public ResponseEntity<Page<ScVoc>> getAllScVoc(Pageable pageable) {
+		Page<ScVoc> scVocResources = vocabularyService.getAllScVoc(pageable);
+		return new ResponseEntity<Page<ScVoc>>(scVocResources, HttpStatus.OK);
+	}
+	
+	// Single Character by number of strokes
+	
 }

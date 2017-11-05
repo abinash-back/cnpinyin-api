@@ -14,6 +14,7 @@ import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnP2Repository;
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnP3Repository;
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnRepository;
 import com.cnpinyin.cnpinyin.app.hskvoc.repositories.HskVocRepository;
+import com.cnpinyin.cnpinyin.app.sc.repositories.ScVocRepository;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
@@ -23,6 +24,7 @@ import com.cnpinyin.cnpinyin.schemas.Cnpn;
 import com.cnpinyin.cnpinyin.schemas.CnpnP2;
 import com.cnpinyin.cnpinyin.schemas.CnpnP3;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
+import com.cnpinyin.cnpinyin.schemas.ScVoc;
 
 @Service
 @Transactional
@@ -42,6 +44,9 @@ public class VocabularyService {
 	
 	@Autowired
 	CnpnP3Repository cnpnP3Repository;
+	
+	@Autowired
+	ScVocRepository scVocRepository;
 	
 	// CNPN
 	public List<TopicResource> getAllTopic(){
@@ -144,5 +149,11 @@ public class VocabularyService {
 	public Page<CnpnP3> getByTopicPart3(String topic, Pageable pageable) {
 		Page<CnpnP3> topics = cnpnP3Repository.findByTopics(topic, pageable);
 		return topics;
+	}
+	
+	// SCVOC
+	public Page<ScVoc> getAllScVoc(Pageable pageable) {
+		Page<ScVoc> scVocs = scVocRepository.findAll(pageable);
+		return scVocs;
 	}
 }
