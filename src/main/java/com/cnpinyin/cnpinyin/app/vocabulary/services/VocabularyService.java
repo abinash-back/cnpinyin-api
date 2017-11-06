@@ -18,6 +18,7 @@ import com.cnpinyin.cnpinyin.app.sc.repositories.ScVocRepository;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.ScStrokeResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.schemas.BctVoc;
 import com.cnpinyin.cnpinyin.schemas.Cnpn;
@@ -155,5 +156,21 @@ public class VocabularyService {
 	public Page<ScVoc> getAllScVoc(Pageable pageable) {
 		Page<ScVoc> scVocs = scVocRepository.findAll(pageable);
 		return scVocs;
+	}
+	
+	// SCVOC-Stroke
+	public List<ScStrokeResource> getAllScStroke() {
+		List<Integer> strokes = scVocRepository.findDistinctStrokes();
+		List<ScStrokeResource> scStrokeResource = new ArrayList<>();
+		for (Integer stroke : strokes) {
+			int size = scVocRepository.countByStrokes(stroke);
+			scStrokeResource.add(new ScStrokeResource(stroke, size));
+		}
+		return scStrokeResource;
+	}
+
+	public Page<ScVoc> getByScStroke(Integer strokes, Pageable pageable) {
+		Page<ScVoc> scStrokes = scVocRepository.findByStrokes(strokes, pageable);
+		return scStrokes;
 	}
 }

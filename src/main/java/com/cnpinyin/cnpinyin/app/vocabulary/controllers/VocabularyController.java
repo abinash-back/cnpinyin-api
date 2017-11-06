@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.ScStrokeResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.services.VocabularyService;
 import com.cnpinyin.cnpinyin.schemas.BctVoc;
@@ -134,5 +135,16 @@ public class VocabularyController {
 	}
 	
 	// Single Character by number of strokes
+	@RequestMapping(value = "sc/stroke", method = RequestMethod.GET)
+	public ResponseEntity<List<ScStrokeResource>> getAllScStroke() {
+		List<ScStrokeResource> scStrokeResources = vocabularyService.getAllScStroke();
+		return new ResponseEntity<List<ScStrokeResource>>(scStrokeResources, HttpStatus.OK);
+	}
 	
+	@RequestMapping(value = "sc/stroke/{strokes}", method = RequestMethod.GET)
+	public ResponseEntity<Page<ScVoc>> getByScStroke(@PathVariable("strokes") final Integer strokes,
+			Pageable pageable) {
+		Page<ScVoc> scStrokeResources = vocabularyService.getByScStroke(strokes, pageable);
+		return new ResponseEntity<Page<ScVoc>>(scStrokeResources, HttpStatus.OK);
+	}
 }

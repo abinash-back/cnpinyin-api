@@ -6,5 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ScStrokeResource {
-
+	
+	int numberOfStroke;
+	int size;
 }
