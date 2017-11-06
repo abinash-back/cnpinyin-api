@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.ScRadicalResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.ScStrokeResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.services.VocabularyService;
@@ -146,5 +147,19 @@ public class VocabularyController {
 			Pageable pageable) {
 		Page<ScVoc> scStrokeResources = vocabularyService.getByScStroke(strokes, pageable);
 		return new ResponseEntity<Page<ScVoc>>(scStrokeResources, HttpStatus.OK);
+	}
+	
+	// Single Character By Radical
+	@RequestMapping(value = "sc/radical", method = RequestMethod.GET)
+	public ResponseEntity<List<ScRadicalResource>> getAllScRadical() {
+		List<ScRadicalResource> scRadicalResources = vocabularyService.getAllScRadical();
+		return new ResponseEntity<List<ScRadicalResource>>(scRadicalResources, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "sc/radical/{radicals}", method = RequestMethod.GET)
+	public ResponseEntity<Page<ScVoc>> getByScRadical(@PathVariable("radicals") final String radicals,
+			Pageable pageable) {
+		Page<ScVoc> scRadicalResources = vocabularyService.getByScRadical(radicals, pageable);
+		return new ResponseEntity<Page<ScVoc>>(scRadicalResources, HttpStatus.OK);
 	}
 }

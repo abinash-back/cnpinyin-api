@@ -35,8 +35,12 @@ public class ScVoc {
 	String SC_eng;
 	String SC_sound;
 	String SC_hints;
-	String SC_radical;
+	
+	@Column(name = "SC_radical")
+	String radical;
+	
 	@Column(name = "SC_stroke_no")
 	int strokes;
+	
 	String SC_index;
 }

@@ -18,6 +18,7 @@ import com.cnpinyin.cnpinyin.app.sc.repositories.ScVocRepository;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LevelResource;
+import com.cnpinyin.cnpinyin.app.vocabulary.resources.ScRadicalResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.ScStrokeResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.TopicResource;
 import com.cnpinyin.cnpinyin.schemas.BctVoc;
@@ -173,4 +174,21 @@ public class VocabularyService {
 		Page<ScVoc> scStrokes = scVocRepository.findByStrokes(strokes, pageable);
 		return scStrokes;
 	}
+
+	//SCVOC-Radical
+	public List<ScRadicalResource> getAllScRadical() {
+		List<String> radicals = scVocRepository.findDistinctRadical();
+		List<ScRadicalResource> scRadicalResource = new ArrayList<>();
+		for (String radical : radicals) {
+			int size = scVocRepository.countByRadical(radical);
+			scRadicalResource.add(new ScRadicalResource(radical, size));
+		}
+		return scRadicalResource;
+	}
+
+	public Page<ScVoc> getByScRadical(String radicals, Pageable pageable) {
+		Page<ScVoc> scRadicals = scVocRepository.findByRadical(radicals, pageable);
+		return scRadicals;
+	}
+	
 }

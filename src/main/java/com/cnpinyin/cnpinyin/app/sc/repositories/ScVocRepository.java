@@ -17,4 +17,11 @@ public interface ScVocRepository extends JpaRepository<ScVoc, Integer> {
 	public int countByStrokes(Integer strokes);
 	
 	Page<ScVoc> findByStrokes(Integer strokes, Pageable pageable);
+	
+	@Query("SELECT DISTINCT a.radical FROM ScVoc a")
+	public List<String> findDistinctRadical();
+	
+	public int countByRadical(String radical);
+	
+	Page<ScVoc> findByRadical(String radical, Pageable pageable);
 }
