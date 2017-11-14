@@ -14,6 +14,7 @@ import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnP2Repository;
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnP3Repository;
 import com.cnpinyin.cnpinyin.app.cnpn.repositories.CnpnRepository;
 import com.cnpinyin.cnpinyin.app.hskvoc.repositories.HskVocRepository;
+import com.cnpinyin.cnpinyin.app.sc.repositories.ScVocPinyinRepository;
 import com.cnpinyin.cnpinyin.app.sc.repositories.ScVocRepository;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.HskLevelResource;
 import com.cnpinyin.cnpinyin.app.vocabulary.resources.LessonResource;
@@ -27,6 +28,7 @@ import com.cnpinyin.cnpinyin.schemas.CnpnP2;
 import com.cnpinyin.cnpinyin.schemas.CnpnP3;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
 import com.cnpinyin.cnpinyin.schemas.ScVoc;
+import com.cnpinyin.cnpinyin.schemas.ScVocPinyin;
 
 @Service
 @Transactional
@@ -49,6 +51,9 @@ public class VocabularyService {
 	
 	@Autowired
 	ScVocRepository scVocRepository;
+	
+	@Autowired
+	ScVocPinyinRepository scVocPinyinRepository;
 	
 	// CNPN
 	public List<TopicResource> getAllTopic(){
@@ -189,6 +194,15 @@ public class VocabularyService {
 	public Page<ScVoc> getByScRadical(String radicals, Pageable pageable) {
 		Page<ScVoc> scRadicals = scVocRepository.findByRadical(radicals, pageable);
 		return scRadicals;
+	}
+
+	public List<String> getByScPinyin(String pinyin) {
+		return scVocPinyinRepository.findByScPinyinChar(pinyin);
+	}
+
+	public Page<ScVocPinyin> getAllScPinyinWord(String pinyins, Pageable pageable) {
+		
+		return scVocPinyinRepository.findByPinyin(pinyins, pageable);
 	}
 	
 }

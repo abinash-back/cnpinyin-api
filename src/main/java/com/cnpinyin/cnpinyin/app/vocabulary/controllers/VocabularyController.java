@@ -26,6 +26,7 @@ import com.cnpinyin.cnpinyin.schemas.CnpnP2;
 import com.cnpinyin.cnpinyin.schemas.CnpnP3;
 import com.cnpinyin.cnpinyin.schemas.HskVoc;
 import com.cnpinyin.cnpinyin.schemas.ScVoc;
+import com.cnpinyin.cnpinyin.schemas.ScVocPinyin;
 
 @RestController
 @RequestMapping(path = "voc", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -161,5 +162,19 @@ public class VocabularyController {
 			Pageable pageable) {
 		Page<ScVoc> scRadicalResources = vocabularyService.getByScRadical(radicals, pageable);
 		return new ResponseEntity<Page<ScVoc>>(scRadicalResources, HttpStatus.OK);
+	}
+	
+	// Single Character By pinyin
+	@RequestMapping(value = "sc/pinyin/{pinyins}", method = RequestMethod.GET)
+	public ResponseEntity<List<String>> getAllScPinyin(@PathVariable("pinyins") final String pinyin) {
+		List<String> scPinyinResources = vocabularyService.getByScPinyin(pinyin);
+		return new ResponseEntity<List<String>>(scPinyinResources, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "sc/pinyin/word/{pinyins}", method = RequestMethod.GET)
+	public ResponseEntity<Page<ScVocPinyin>> getAllScPinyinWord(@PathVariable("pinyins") final String pinyins,
+			Pageable pageable) {
+		Page<ScVocPinyin> scPinyinResources = vocabularyService.getAllScPinyinWord(pinyins, pageable);
+		return new ResponseEntity<Page<ScVocPinyin>>(scPinyinResources, HttpStatus.OK);
 	}
 }
